@@ -1,6 +1,6 @@
 import { Server } from "bun";
 import { Router } from "./router";
-import { SivaRequest, HTTPmethods, Handler } from "./types"; // Asegúrate de importar los tipos adecuados
+import { SivaRequest, HTTPmethods, Handler } from "./types";
 
 class Siva {
   router: Router;

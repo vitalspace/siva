@@ -10,5 +10,5 @@ app.get("/some", () => {
 });
 
 app.serve({ port: 3000 }, () => {
-  console.log("Listening on port http://localhost:3000");
+  console.log("Server on port http://localhost:3000");
 });

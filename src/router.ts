@@ -1,4 +1,4 @@
-import { HTTPmethods, SivaRequest, Route }  from "./types";
+import { HTTPmethods, Route }  from "./types";
 
 class Router {
   routes: Record<string, Route>;
@@ -13,7 +13,7 @@ class Router {
         `Route ${path} already defined with method ${this.routes[path].method}`
       );
     }
-    this.routes[path] = { method, handler };
+    this.routes[path] = { method, params: {}, handler };
   }
 
   lookup(path: string): Route {
