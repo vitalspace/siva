@@ -14,6 +14,8 @@ class Siva {
 
     const matched = this.router.lookup(pathname);
 
+    console.log(this.router)
+
     if (!matched) {
       return new Response("Not Found", { status: 404 });
     }

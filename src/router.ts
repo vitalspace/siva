@@ -1,10 +1,13 @@
+import { HTTPmethods, SivaRequest, Route }  from "./types";
+
 class Router {
-  routes: any;
+  routes: Record<string, Route>;
+
   constructor() {
     this.routes = {};
   }
 
-  add(method, path, handler) {
+  add(method: HTTPmethods, path: string, handler: (request: SivaRequest) => Response) {
     if (this.routes[path]) {
       throw new Error(
         `Route ${path} already defined with method ${this.routes[path].method}`
@@ -13,9 +16,9 @@ class Router {
     this.routes[path] = { method, handler };
   }
 
-  lookup(path) {
+  lookup(path: string): Route {
     return this.routes[path];
   }
 }
 
-export { Router }
+export { Router };
