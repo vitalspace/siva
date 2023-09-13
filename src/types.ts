@@ -12,6 +12,10 @@ export interface SivaRequest<T extends string = ""> extends Request {
 }
 
 export interface Route {
+  params: {};
   method: HTTPmethods | "ALL";
   handler: (request: SivaRequest) => Response;
 }
+
+
+export type Handler<T extends string> = (request: SivaRequest<T>) => Response

@@ -7,7 +7,7 @@ class Router {
     this.routes = {};
   }
 
-  add(method: HTTPmethods, path: string, handler: (request: SivaRequest) => Response) {
+  add(method: HTTPmethods, path: string, handler: (request: Request) => Response) {
     if (this.routes[path]) {
       throw new Error(
         `Route ${path} already defined with method ${this.routes[path].method}`
