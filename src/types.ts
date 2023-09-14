@@ -12,13 +12,14 @@ export type ParamsFromUrl<T extends string> =
     : never;
 
 // Interface extending the Request interface with a 'params' property
-export interface SivaRequest<T extends string = ""> extends Request {
-  params?: Record<ParamsFromUrl<T>, string>;
+export interface SivaRequest<T extends string = ''> extends Request {
+    params?: Record<ParamsFromUrl<T>, string>
 }
-
+  
 // Interface representing a route in the router
 export interface Route {
-  params: {}; // This property could be used to specify route-specific parameters
+  permutations?: string,
+  params?: {}; // This property could be used to specify route-specific parameters
   method: HTTPmethods | "ALL"; // Allowed HTTP method for this route
   handler: (request: SivaRequest) => Response; // Function that handles the request for this route
 }

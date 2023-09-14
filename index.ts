@@ -1,13 +1,27 @@
 import { Siva } from "./src/index";
 const app = new Siva();
 
-app.get("/", () => {
+app.get('/', () => {
   return new Response("Hello world");
 });
 
-app.get("/some", () => {
-  return new Response("hello some");
+app.get('/some/some', () => {
+  return new Response("Hello world s");
 });
+
+
+
+app.get('/path/:name', (request) => {
+  return Response.json({
+    name: request.params.name
+  })
+})
+
+app.get('/path/some/som/:id', (request) => {
+  return Response.json({
+    id: request.params.id
+  })
+})
 
 app.serve({ port: 3000 }, () => {
   console.log("Server on port http://localhost:3000");

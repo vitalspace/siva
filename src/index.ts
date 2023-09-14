@@ -41,12 +41,13 @@ class Siva {
 
   // Method to add a route with a specific HTTP method and path
   use<T extends string>(path: T, handler: Handler<T>, method: HTTPmethods) {
+    // console.log(path, method,  handler)
     this.router.add(method, path, handler);
   }
 
   // Convenience method to add a route with the HTTP GET method
   get<T extends string>(path: T, handler: Handler<T>) {
-    this.use(path, handler, "GET");
+    this.use(path, handler, 'GET')
   }
 
   // Method to serve the Siva http server on a specified server

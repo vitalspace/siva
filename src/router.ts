@@ -1,39 +1,55 @@
 import { HTTPmethods, Route } from "./types";
 
-// Class representing a simple router
 class Router {
-  routes: Record<string, Route>;
+  staticRoutes: Record<string, Route>;
+  paramRoutes: Map<
+    string,
+    { paramName: string; method: HTTPmethods; handler: (request: Request) => Response;}
+  >;
 
-  // Constructor to initialize the router
   constructor() {
-    // Initialize an empty object to store routes
-    this.routes = {};
+    this.staticRoutes = {};
+    this.paramRoutes = new Map();
   }
 
-  // Method to add a new route to the router
   add(
     method: HTTPmethods,
     path: string,
     handler: (request: Request) => Response
   ) {
-    // Check if the route already exists
-    if (this.routes[path]) {
-      // If the route exists, throw an error indicating the conflict
-      throw new Error(
-        `Route ${path} already defined with method ${this.routes[path].method}`
-      );
+    if (this.staticRoutes[path] || this.paramRoutes.has(path.split(":")[0])) {
+      throw new Error(`Route ${path} already defined`);
     }
 
-    // If the route doesn't exist, add it to the routes object
-    this.routes[path] = { method, params: {}, handler };
+    if (path.includes("/:")) {
+      const [staticPart, paramName] = path.split(":");
+      this.paramRoutes.set(staticPart, { paramName, method, handler });
+      console.log(this.paramRoutes )
+    } else {
+      this.staticRoutes[path] = { method, handler };
+    }
   }
 
-  // Method to look up a route by its path
   lookup(path: string): Route {
-    // Return the route associated with the provided path
-    return this.routes[path];
+    if (this.staticRoutes[path]) {
+      return this.staticRoutes[path];
+    }
+  
+    const routeParts = path.split("/");
+    const filteredArray = [...new Set(routeParts.filter(el => el !== ""))];
+    const allExceptLast = filteredArray.slice(0, -1); 
+    const res =  "/" + allExceptLast.join("/") + "/"
+    const paramRoute = this.paramRoutes.get(res);
+    const paramValue = routeParts.pop();
+    
+    if (paramRoute) {
+      return {
+        method: paramRoute.method, // or whatever your default method is
+        params: { [paramRoute.paramName]: paramValue },
+        handler: paramRoute.handler
+      };
+    }
   }
 }
 
-// Export the Router class for use in other modules
 export { Router };
