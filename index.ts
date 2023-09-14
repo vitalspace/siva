@@ -9,8 +9,6 @@ app.get('/some/some', () => {
   return new Response("Hello world s");
 });
 
-
-
 app.get('/path/:name', (request) => {
   return Response.json({
     name: request.params.name

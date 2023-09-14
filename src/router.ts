@@ -44,7 +44,7 @@ class Router {
     
     if (paramRoute) {
       return {
-        method: paramRoute.method, // or whatever your default method is
+        method: paramRoute.method,
         params: { [paramRoute.paramName]: paramValue },
         handler: paramRoute.handler
       };
