@@ -2,7 +2,10 @@ import { Siva } from "./src/index";
 const app = new Siva();
 
 app.get('/', () => {
-  return new Response("Hello world");
+
+  return new Response(JSON.stringify({"name": "lucas", "id": "evb287649b7v862b98v3476b87"}))
+
+  // return new Response("Hello world");
 });
 
 app.get('/some/some', () => {

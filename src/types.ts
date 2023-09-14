@@ -18,7 +18,6 @@ export interface SivaRequest<T extends string = ''> extends Request {
   
 // Interface representing a route in the router
 export interface Route {
-  permutations?: string,
   params?: {}; // This property could be used to specify route-specific parameters
   method: HTTPmethods | "ALL"; // Allowed HTTP method for this route
   handler: (request: SivaRequest) => Response; // Function that handles the request for this route
