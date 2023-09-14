@@ -34,6 +34,7 @@ class Router {
   }
 
   lookup(path: string): Route {
+    
     if (this.staticRoutes[path]) {
       return this.staticRoutes[path];
     }

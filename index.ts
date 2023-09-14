@@ -2,10 +2,7 @@ import { Siva } from "./src/index";
 const app = new Siva();
 
 app.get('/', () => {
-
   return new Response(JSON.stringify({"name": "lucas", "id": "evb287649b7v862b98v3476b87"}))
-
-  // return new Response("Hello world");
 });
 
 app.get('/some/some', () => {
@@ -17,6 +14,13 @@ app.get('/path/:name', (request) => {
     name: request.params.name
   })
 })
+
+app.post('/users', async (request) => {
+  const body = await request.json();
+  console.log(JSON.stringify(body))
+  return new Response(JSON.stringify({"message": "recived"}))
+})
+
 
 app.get('/path/some/som/:id', (request) => {
   return Response.json({

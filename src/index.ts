@@ -49,6 +49,10 @@ class Siva {
   get<T extends string>(path: T, handler: Handler<T>) {
     this.use(path, handler, 'GET')
   }
+  
+  post<T extends string>(path: T, handler: Handler<T>) {
+    this.use(path, handler, 'POST')
+  }
 
   // Method to serve the Siva http server on a specified server
   serve(options: any, callback?: (server: Server) => void) {
